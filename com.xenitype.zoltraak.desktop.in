@@ -1,0 +1,10 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=Zoltraak
+Comment=My custom C++ game engine
+# Replace these with the actual absolute paths on your machine
+Exec=@CMAKE_CURRENT_BINARY_DIR@/Zoltraak
+Icon=@CMAKE_CURRENT_SOURCE_DIR@/assets/zoltraak_icon.bmp
+Terminal=false
+StartupNotify=true
