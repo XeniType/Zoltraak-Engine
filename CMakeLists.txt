@@ -18,7 +18,7 @@ FetchContent_Declare(glm GIT_REPOSITORY https://github.com/g-truc/glm.git GIT_TA
 FetchContent_MakeAvailable(glm)
 
 # 3. vkbootstrap
-FetchContent_Declare(vkbootstrap GIT_REPOSITORY https://github.com/charles-lunarg/vk-bootstrap.git GIT_TAG v0.3.1)
+FetchContent_Declare(vkbootstrap GIT_REPOSITORY https://github.com/charles-lunarg/vk-bootstrap.git GIT_TAG v1.3.302)
 FetchContent_MakeAvailable(vkbootstrap)
 
 # 4. fastgltf (Requires simdjson, which it downloads automatically)
@@ -32,15 +32,32 @@ FetchContent_Declare(
 )
 FetchContent_MakeAvailable(SDL3)
 
+FetchContent_Declare(
+        VulkanMemoryAllocator
+        GIT_REPOSITORY https://github.com/GPUOpen-LibrariesAndSDKs/VulkanMemoryAllocator.git
+        GIT_TAG        v3.1.0
+)
+FetchContent_MakeAvailable(VulkanMemoryAllocator)
+
 #Executables
-add_executable(${PROJECT_NAME} src/main.cpp)
+add_executable(${PROJECT_NAME} 
+        src/main.cpp
+        src/zoltraak_engine.cpp
+)
 
 #Includes and Libraries
 target_include_directories(${PROJECT_NAME} PRIVATE include)
 
 target_include_directories(${PROJECT_NAME} PUBLIC assets)
 
-target_link_libraries(${PROJECT_NAME} PRIVATE Vulkan::Vulkan SDL3::SDL3 fmt::fmt glm::glm vk-bootstrap fastgltf)
+target_link_libraries(${PROJECT_NAME} PRIVATE 
+        Vulkan::Vulkan
+        GPUOpen::VulkanMemoryAllocator
+        SDL3::SDL3 
+        fmt::fmt 
+        glm::glm 
+        vk-bootstrap 
+        fastgltf)
 
 configure_file(
         ${CMAKE_CURRENT_SOURCE_DIR}/com.xenitype.zoltraak.desktop.in

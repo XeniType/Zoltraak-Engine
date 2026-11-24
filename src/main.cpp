@@ -1,23 +1,14 @@
-#include <iostream>
-#include <Window/Window.h>
+#include <zoltraak_engine.h>
 
-
-int main() {
+int main(int argc, char** argv) 
+{
+    Zoltraak::zoltraak_engine engine;
     
-    SDL_SetAppMetadata("My Game", "1.0", "com.xenitype.zoltraak");
+    engine.init();
     
-    try
-    {
-        Zoltraak::Window window("Zoltraak", 640, 480);
-        
-        while (!window.shouldClose())
-        {
-            window.update();
-        }
-    }catch (std::exception& e)
-    {
-        std::cerr << "Fatal Error: " << e.what() << '\n';
-        return 1;
-    }
+    engine.run();
+    
+    engine.cleanup();
+    
     return 0;
 }
